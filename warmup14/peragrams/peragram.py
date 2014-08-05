@@ -17,12 +17,12 @@ def main():
             oddchar = l[-1]
             d[oddchar] -= 1
             n += 1
+            del l[-1]
             if d[oddchar] == 0:
-                del l[-1]
                 del d[oddchar]
     print n
     return 0
 
 
 if __name__ == '__main__':
-	sys.exit(main())
+    sys.exit(main())
