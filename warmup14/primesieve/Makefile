@@ -1,8 +1,10 @@
 CC = clang
-CFLAGS= -Wall -Werror -Wextra -O3 -pedantic -std=c99 -g
+CFLAGS= -Wall -Werror -Wextra -O3 -pedantic -std=c99
+#CFLAGS+=-g
 LDFLAGS= -lm
 
-all: sieve
+PROGS = sieve sieve_bit
+all: $(PROGS)
 
 clean:
-	$(RM) sieve
+	$(RM) $(PROGS)
