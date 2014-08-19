@@ -22,18 +22,14 @@ static inline size_t bit_index(size_t pos)
 	return pos % (sizeof(unsigned int) * 8);
 }
 
-static void bitset_set(bitset *bits, size_t pos)
+static inline void bitset_set(bitset *bits, size_t pos)
 {
-	size_t part = part_index(pos);
-	size_t bit = bit_index(pos);
-	bits->parts[part] |= 0x1 << bit;
+	bits->parts[part_index(pos)] |= 0x1 << bit_index(pos);
 }
 
-static unsigned char bitset_get(bitset *bits, size_t pos)
+static inline unsigned char bitset_get(bitset *bits, size_t pos)
 {
-	size_t part = part_index(pos);
-	size_t bit = bit_index(pos);
-	return (bits->parts[part] >> bit) & 0x1;
+	return (bits->parts[part_index(pos)] >> bit_index(pos)) & 0x1;
 }
 
 res_t *getsieve(int n)
@@ -41,7 +37,8 @@ res_t *getsieve(int n)
 	res_t * r = malloc(sizeof(res_t));
 	r->n_primes = n - 2;
 	r->bits = malloc(sizeof(bitset));
-	r->bits->n_parts = (int) ceil(((double) (n + 1)) / (sizeof(unsigned int) * 8));
+	r->bits->n_parts =
+		(int) ceil(((double) (n + 1)) / (sizeof(unsigned int) * 8));
 	r->bits->parts = calloc(r->bits->n_parts, sizeof (unsigned int));
 
 	bitset_set(r->bits, 0);
