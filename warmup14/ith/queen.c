@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 
-
 #define forever for(;;)
-
 #define min(x,y) ((x) > (y) ? (y) : (x))
 #define max(x,y) min(y,x)
 
@@ -129,7 +127,7 @@ int main(void)
 		mat.y = y;
 		mat.cap = (size_t) ceil(((double) n_bits / 8));
 		mat.n_bits = n_bits;
-		mat.data = calloc(mat.cap, 1);
+		mat.data = calloc(1, mat.cap);
 
 		for (i = 0; i < n; ++i) {
 			size_t qx, qy;
