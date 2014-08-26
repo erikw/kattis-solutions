@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -66,7 +65,6 @@ static void bitmat_set_diag_rise(bitmat *mat, size_t qx, size_t qy)
 	for (; x < mat->x && y >= 0; ++x, --y) {
 		bitmat_set(mat, c2i(mat, x, y));
 	}
-
 }
 
 static void bitmat_set_diag_fall(bitmat *mat, size_t qx, size_t qy)
@@ -79,13 +77,9 @@ static void bitmat_set_diag_fall(bitmat *mat, size_t qx, size_t qy)
 	m = qy - k * qx;
 	x = max(m, 0);
 	y = k * x + m;
-	//printf("qx = %zu, qy = %zu, m=%d\n", qx, qy, m);
-	//printf("y = %zu\n", y);
-	//printf("x = %zu\n", x);
 	for (; x < mat->x && y < mat->y; ++x, ++y) {
 		bitmat_set(mat, c2i(mat, x, y));
 	}
-
 }
 
 
@@ -121,7 +115,6 @@ static size_t count_zeroes(bitmat *mat)
 int main(void)
 {
 	bitmat mat;
-
 	forever {
 		size_t x, y, n, i;
 		size_t n_bits;
@@ -154,6 +147,5 @@ int main(void)
 		printf("%zu\n", count_zeroes(&mat));
 		free(mat.data);
 	}
-
 	return EXIT_SUCCESS;
 }
