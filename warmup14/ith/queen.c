@@ -58,10 +58,11 @@ static void bitmat_set_diag_rise(bitmat *mat, size_t qx, size_t qy)
 	int y;
 	size_t x;
 	size_t m;
+	int k = -1;
 
-	m = qy + qx;
+	m = qy - k * qx;
 	y = min(m, mat->y - 1);
-	x = m - y;
+	x = (y - m) / k;
 	for (; x < mat->x && y >= 0; ++x, --y) {
 		bitmat_set(mat, c2i(mat, x, y));
 	}
@@ -72,14 +73,15 @@ static void bitmat_set_diag_fall(bitmat *mat, size_t qx, size_t qy)
 {
 	size_t y;
 	int m;
-	int x;
+	size_t x;
+	int k = 1;
 
-	m = qy - qx;
-	y = m;
-	x = max(y - m, 0);
-	printf("qx = %zu, qy = %zu, m=%zu\n", qx, qy, m);
-	printf("y = %zu\n", y);
-	printf("x = %zu\n", x);
+	m = qy - k * qx;
+	x = max(m, 0);
+	y = k * x + m;
+	//printf("qx = %zu, qy = %zu, m=%d\n", qx, qy, m);
+	//printf("y = %zu\n", y);
+	//printf("x = %zu\n", x);
 	for (; x < mat->x && y < mat->y; ++x, ++y) {
 		bitmat_set(mat, c2i(mat, x, y));
 	}
@@ -148,7 +150,7 @@ int main(void)
 			bitmat_set_diag_fall(&mat, qx, qy);
 		}
 
-		bitmat_print(&mat);
+		//bitmat_print(&mat);
 		printf("%zu\n", count_zeroes(&mat));
 		free(mat.data);
 	}
