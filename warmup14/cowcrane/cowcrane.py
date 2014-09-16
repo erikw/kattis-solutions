@@ -6,36 +6,41 @@ tm, tl = [int(t) for t in raw_input().split()]
 
 crane = 10**8
 
-def lydia_first():
-	ttlt = abs(crane - l) + abs(L - l)
-	#print "time to lydia:", ttlt
-	ttmt = ttlt + abs(L - m) + abs(M - m)
-	#print "time to monica:", ttmt
+def cowrec(pos=10**8, time=0, cl=l, cm=m):
+    print pos-10**8, time, cl-10**8, cm-10**8
+    if time > tm or time > tl:
+        print "timeout"
+        return False
 
-	return ttlt <= tl and ttmt <= tm
+    if cl == L and cm == M:
+        return True
 
-def monica_first():
-	ttmt = abs(crane - m) + abs(M - m)
-	#print "time to monica:", ttmt
-	ttlt = ttmt + abs(M - l) + abs(L - l)
-	#print "time to lydia:", ttlt
+    if pos == cl or pos == cm:
+        if pos == cl and pos == cm:
+            print "here both"
+            return (cowrec(M, time + abs(pos - M), cl, M) or 
+                   cowrec(L, time + abs(pos - L), L, cm))
+        elif pos == cl:
+            print "here pos == cl"
+            return (cowrec(cm, time + abs(cm - cl), cm, cm) or 
+                   cowrec(L, time + abs(L - cl), L, cm))
+        elif pos == cm:
+            print "here pos == cm"
+            return  (cowrec(cl, time + abs(cm - cl), cl, cl) or 
+                   cowrec(M, time + abs(M - cm), cl, M))
+    elif cl == L:
+        print "lydia done"
+        return cowrec(cm, time + abs(pos - cm), cl, cm)
+    elif cm == M:
+        print "monica done"
+        return cowrec(cl, time + abs(pos - cl), cl, cm)
+    else:
+        print "here"
+        return (cowrec(cm, time + abs(pos - cm), cl, cm) or
+                cowrec(cl, time + abs(pos - cl), cl, cm))
 
-	return ttmt <= tm and ttlt <= tl
 
-def bring_lydia():
-	ttl = abs(crane - l) + abs(l - m)
-	ttm = ttl + abs(M - m)
-	ttl += abs(M - m) + abs(m - L)
-
-	return ttm <= tm and ttl <= tl
-
-def bring_monica():
-	ttm = abs(crane - m) + abs(m - l)
-	ttl = ttm + abs(L - l)
-	ttm += abs(L - l) + abs(l - M)
-
-	return ttm <= tm and ttl <= tl
-
-res = "possible" if lydia_first() or monica_first() or bring_lydia() or bring_monica() else "impossible"
+res = "possible" if cowrec() else "impossible"
 
 print res
+
