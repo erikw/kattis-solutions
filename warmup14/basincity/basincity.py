@@ -20,33 +20,50 @@ def reinsert(g, ch):
         g[u].add(ch[0])
 
 rec_cnt = 0
-def r0(g):
+def r0(graph):
     global rec_cnt
     rec_cnt += 1
 
-    if not g:
+    if not graph:
         return 0                # 1
     u = None                    # v w/ most neigh.
-    for v, n in g.iteritems():
-        if not n:
-            ch = remove_vertex(g, v)
-            tmp = 1 + r0(g)   # 2
-            reinsert(g, ch)
+    for v, neighbours in graph.iteritems():
+        if not neighbours:
+            ch = remove_vertex(graph, v)
+            tmp = 1 + r0(graph)   # 2
+            reinsert(graph, ch)
             return tmp
 
-        if not u or len(n) > len(g[u]):
+        if not u or len(neighbours) > len(graph[u]):
             u = v
 
     # 3
-    ch = []
-    nb = set(g[u])
-    ch.append(remove_vertex(g, u))
-    bval = r0(g)
-    for v in nb:
-        ch.append(remove_vertex(g, v))
-    aval = 1 + r0(g)
-    for c in reversed(ch):
-        reinsert(g, c)
+    changed_nodes = []
+    neighbours = set(graph[u])
+    changed_nodes.append(remove_vertex(graph, u))
+    if len(neighbours) >= 2:
+        combs = [x for x in itertools.combinations(neighbours, 2)]
+        random.shuffle(combs)
+        bvals = []
+        for comb in combs:
+            changed_nodes.append(remove_vertex(graph, comb[0]))
+            changed_nodes.append(remove_vertex(graph, comb[1]))
+            bvals.append(2 + r0(graph))
+            for c in reversed(changed_nodes):
+                reinsert(graph, c)
+        bval = max(bvals)
+        changed_nodes = []
+        changed_nodes.append(remove_vertex(graph, u))
+    else:
+        bval = r0(graph)
+
+
+
+    for v in neighbours:
+        changed_nodes.append(remove_vertex(graph, v))
+    aval = 1 + r0(graph)
+    for c in reversed(changed_nodes):
+        reinsert(graph, c)
 
     return max(aval, bval)
 
@@ -60,6 +77,7 @@ for i, line in enumerate(sys.stdin):
 
 mis = r0(intersections)
 
+print "mis = %d\nk= %d" % (mis, k)
 if mis < k:
     print "impossible"
 else:
