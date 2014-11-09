@@ -21,7 +21,7 @@ def rabin_karp_sublist_search(s, pattern):
     n = len(s)
     hs = sum(s[:m])
     hpattern = sum(pattern)
-    for i in range(0, n - m):
+    for i in range(0, n - m + 1):
         if hs == hpattern:
             if s[i:i + m] == pattern:
                 return True # Can return index here instead.
