@@ -34,21 +34,38 @@ bool circularly_equal(
 }
 
 
+template <class InputIterator>
+unsigned hash(InputIterator start, InputIterator end, unsigned p, unsigned mod)
+{
+    unsigned h = 0;
+    unsigned power = 1;
+    while (start != end) {
+	h += (*start * power) % mod;
+	power *= p;
+	++start;
+    }
+    return h;
+}
+
+
+
 // Execute a circular rabin_karp_sublist_search.
 bool rabin_karp_sublist_search(vector<unsigned> str, unsigned hs,
-                               vector<unsigned> pat, unsigned hp)
+                               vector<unsigned> pat, unsigned hp,
+			       unsigned power, unsigned mod)
 {
     // Run Rabin Karp substring searching using a rolling hash.
     size_t n = str.size();
     size_t m = pat.size();
-    for (size_t i = 0; i < n; ++i) {
+    for (size_t i = 0; i < n - m; ++i) {
+	//cout << "hs=" << hs << " hp=" << hp << " power=" << power << endl;
         if (hs == hp) {
-            if (circularly_equal(str.begin(), str.begin() + i, str.end(),
-                                 pat.begin(), pat.end()))
+            if (equal(str.begin(), str.begin() + i, pat.begin()))
                 return true; // Could also return index here.
         }
-        hs = hs - str[i] + str[(i + m) % n];
-        //hs = p_first * (hs - str[i]*p_last) + p_first * str[(i + m) % n];
+        //hs = hs - str[i] + str[(i + m) % n];
+        hs = (11 * (hs - str[i]*power % mod) + str[(i + m)]) % mod;
+	//cout << "hs=" << hs << " hash=" << hash(str.rbegin() + i, str.rbegin() + i + m, 11, mod) << endl;
     }
     return false;
 }
@@ -73,28 +90,33 @@ int main(void)
 
     // Compute angle differences and intial sum hashes.
     unsigned hs = 0;
-    unsigned pow = 1;
-    unsigned tmp = cl0[0];
+    unsigned hp = 0;
+    unsigned tmp0 = cl0[0];
+    unsigned tmp1 = cl0[0];
     for (size_t i = 0; i < n - 1; ++i) {
         cl0[i] = cl0[i + 1] - cl0[i];
-        hs += cl0[i];
-        pow *= p;
-    }
-    cl0[n - 1] = 360000 - cl0[n - 1] + tmp;
-    hs += cl0[n - 1];
-
-    tmp = cl1[0];
-    pow = 1;
-    unsigned hp = 0;
-    for (size_t i = 0; i < n - 1; ++i) {
         cl1[i] = cl1[i + 1] - cl1[i];
-        hp += cl1[i];
-        pow *= p;
     }
-    cl1[n - 1] = 360000 - cl1[n - 1] + tmp;
-    hp += cl1[n - 1];
+    cl0[n - 1] = 360000 - cl0[n - 1] + tmp0;
+    cl1[n - 1] = 360000 - cl1[n - 1] + tmp1;
 
-    if (rabin_karp_sublist_search(cl0, hs, cl1, hp))
+    // Compute the hashes.
+    unsigned power = 1;
+    for (ssize_t i = n - 1; i > 0; --i) {
+	hs += cl0[i] * power % p;
+	hp += cl1[i] * power % p;
+	power *= 11;
+    }
+
+    vector<unsigned> cl2(2*n);
+    cl2.insert(cl2.end(), cl0.begin(), cl0.end());
+    cl2.insert(cl2.end(), cl0.begin(), cl0.end());
+
+    // cout << "hp=" << hp << " hash=" << hash(cl1.rbegin(), cl1.rend(), 11, p) << endl;
+    // cout << "hs=" << hs << " hash=" << hash(cl2.rbegin(), cl2.rbegin() + n, 11, p) << endl << endl;
+
+
+    if (rabin_karp_sublist_search(cl2, hs, cl1, hp, power, p))
         cout << "possible" << endl;
     else
         cout << "impossible" << endl;

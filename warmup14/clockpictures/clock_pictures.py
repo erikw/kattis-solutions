@@ -16,16 +16,29 @@ def naive_sublist_search(l0, l1):
         return True # Can return index here instead.
     return False
 
+
+def hash_func(seq):
+    p = 11
+    power = 1
+    h = 0
+    for i in range(0, len(seq)):
+        h += power * seq[len(seq) - i - 1]
+        power *= p
+    return h
+
 def rabin_karp_sublist_search(s, pattern):
     m = len(pattern)
     n = len(s)
-    hs = sum(s[:m])
-    hpattern = sum(pattern)
-    for i in range(0, n - m + 1):
-        if hs == hpattern:
+    hs = hash_func(s[:m])
+    hp = hash_func(pattern)
+
+    print (11**(m - 1))
+    for i in range(0, n - m):
+        #print hs, hp, s[i:i + m], pattern
+        if hs == hp:
             if s[i:i + m] == pattern:
                 return True # Can return index here instead.
-        hs = hs - s[i] + s[i + m]
+        hs = 11 * (hs - s[i]* 11**(m - 1)) + s[i + m]
     return False
 
 
