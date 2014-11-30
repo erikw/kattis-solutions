@@ -1,80 +1,70 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <iterator>
 
 using namespace std;
 
-/** @brief Test if the first range is circularly equal with the second one.
+/** @brief Compute the Knuth-Morris-Pratt substring search table.
 
-    @param first1 The first element of the first sequence.
-    @param start1 The starting element for the first sequence.
-    @param last1 The last element of the first sequence.
-    @param start2 The first element of the second sequence.
-    @param last2 The last element of the second sequence.
+    @param word The word to construct the table for.
+    @return The kmp table.
 */
-template <class InputIterator1, class InputIterator2>
-bool circularly_equal(
-    InputIterator1 first1, InputIterator1 start1, InputIterator1 last1,
-    InputIterator2 start2, InputIterator2 last2
-    )
+vector<int> kmp_table(vector<unsigned> word)
 {
-    while (start2 != last2) {
-
-        if (!(*start1 == *start2))
-            return false;
-
-        ++start1;
-        ++start2;
-
-        // If we reached one past the last element, wrap around.
-        if (start1 == last1)
-            start1 = first1;
-    }
-    return true;
-}
-
-
-template <class InputIterator>
-unsigned hash(InputIterator start, InputIterator end, unsigned p, unsigned mod)
-{
-    unsigned h = 0;
-    unsigned power = 1;
-    while (start != end) {
-	h += (*start * power) % mod;
-	power *= p;
-	++start;
-    }
-    return h;
-}
-
-
-
-// Execute a circular rabin_karp_sublist_search.
-bool rabin_karp_sublist_search(vector<unsigned> str, unsigned hs,
-                               vector<unsigned> pat, unsigned hp,
-			       unsigned power, unsigned mod)
-{
-    // Run Rabin Karp substring searching using a rolling hash.
-    size_t n = str.size();
-    size_t m = pat.size();
-    for (size_t i = 0; i < n - m; ++i) {
-	//cout << "hs=" << hs << " hp=" << hp << " power=" << power << endl;
-        if (hs == hp) {
-            if (equal(str.begin(), str.begin() + i, pat.begin()))
-                return true; // Could also return index here.
+    vector<int> t(word.size());
+    t[0] = -1;
+    t[1] = 0;
+    size_t pos = 2;
+    size_t cnd = 0;
+    while (pos < word.size()) {
+        if (word[pos - 1] == word[cnd]) {
+            // Case 1: The substring continues.
+            cnd++;
+            t[pos++] = cnd;
+        } else if (cnd > 0) {
+            // Case 2: The substring does not continue but we can fall back.
+            cnd = t[cnd];
+        } else {
+            // Case 3: We have run out of candidates.
+            t[pos++] = 0;
         }
-        //hs = hs - str[i] + str[(i + m) % n];
-        hs = (11 * (hs - str[i]*power % mod) + str[(i + m)]) % mod;
-	//cout << "hs=" << hs << " hash=" << hash(str.rbegin() + i, str.rbegin() + i + m, 11, mod) << endl;
+    }
+    return t;
+}
+
+/** @brief Execute the Knuth-orris-Pratt substring search.
+
+    @param text The text where we will look for the substring.
+    @param word The substring we are looking for.
+    @return True if the substring was found, false otherwise.
+*/
+bool kmp_search(vector<unsigned> text, vector<unsigned> word)
+{
+    size_t m = 0;
+    size_t i = 0;
+    vector<int> t = kmp_table(word);
+    while (m + i < text.size()) {
+        if (word[i] == text[m + i]) {
+            if (i == word.size() - 1)
+                return true; // m is the beginning of the match.
+            i++;
+        } else {
+            if (t[i] > -1) {
+                m += i - t[i];
+                i = t[i];
+            } else {
+                i = 0;
+                m++;
+            }
+        }
     }
     return false;
 }
 
-
 int main(void)
 {
     size_t n = 0;
-    unsigned p = 27644437; // A large prime.
     cin >> n;
 
     // Read all input.
@@ -89,10 +79,8 @@ int main(void)
     sort(cl1.begin(), cl1.end());
 
     // Compute angle differences and intial sum hashes.
-    unsigned hs = 0;
-    unsigned hp = 0;
     unsigned tmp0 = cl0[0];
-    unsigned tmp1 = cl0[0];
+    unsigned tmp1 = cl1[0];
     for (size_t i = 0; i < n - 1; ++i) {
         cl0[i] = cl0[i + 1] - cl0[i];
         cl1[i] = cl1[i + 1] - cl1[i];
@@ -100,23 +88,12 @@ int main(void)
     cl0[n - 1] = 360000 - cl0[n - 1] + tmp0;
     cl1[n - 1] = 360000 - cl1[n - 1] + tmp1;
 
-    // Compute the hashes.
-    unsigned power = 1;
-    for (ssize_t i = n - 1; i > 0; --i) {
-	hs += cl0[i] * power % p;
-	hp += cl1[i] * power % p;
-	power *= 11;
-    }
-
-    vector<unsigned> cl2(2*n);
-    cl2.insert(cl2.end(), cl0.begin(), cl0.end());
+    // Duplicate the first clock face.
+    vector<unsigned> cl2(cl0.begin(), cl0.end());
     cl2.insert(cl2.end(), cl0.begin(), cl0.end());
 
-    // cout << "hp=" << hp << " hash=" << hash(cl1.rbegin(), cl1.rend(), 11, p) << endl;
-    // cout << "hs=" << hs << " hash=" << hash(cl2.rbegin(), cl2.rbegin() + n, 11, p) << endl << endl;
-
-
-    if (rabin_karp_sublist_search(cl2, hs, cl1, hp, power, p))
+    // Execute the substring-search.
+    if (kmp_search(cl2, cl1))
         cout << "possible" << endl;
     else
         cout << "impossible" << endl;
