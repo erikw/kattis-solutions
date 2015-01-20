@@ -1,13 +1,12 @@
-#!/usr/bin/env python
-from __future__ import print_function
+#!/usr/bin/env python2
 
 import sys
 
 n=int(raw_input())
 
-for i in xrange(n):
+for i in xrange(1,n+1):
     last=None
-    print("Case #%d: " % (i+1), end="")
+    sys.stdout.write("Case #%d: " % i)
     word=raw_input()
     for c in word[:]:
         if c == " ":
@@ -26,7 +25,7 @@ for i in xrange(n):
             nbr = (ord(c) - ord("a"))/3 + 2
             repeat = 1 + ord(c) - ((nbr - 2) * 3 + ord("a"))
         if last == nbr:
-            print(" ", end="")
+            sys.stdout.write(" ")
         last = nbr
-        print(str(nbr) * repeat, end="")
-    print("")
+        sys.stdout.write(str(nbr) * repeat)
+    sys.stdout.write('\n')
