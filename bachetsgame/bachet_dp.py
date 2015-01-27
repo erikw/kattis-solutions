@@ -33,6 +33,7 @@ for line in sys.stdin:
     wins = [None] * (n + 1)
 
     compute_win(n, nbrs, wins)
+    print "Percentage of wins calculated: %f" % (100.0 *  (len([x for x in wins if x is not None]) / float(len(wins))))
     if wins[n]:
         print "Stan wins"
     else:
