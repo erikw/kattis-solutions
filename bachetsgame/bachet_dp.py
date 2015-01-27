@@ -2,16 +2,14 @@
 
 import sys
 
+#depth=0
 
 # P = False
 # N = True
-
-depth=0
-
 def compute_win(n, nbrs, wins):
-    global depth
-    depth += 1
-    print "depth = %d, n = %d" % (depth, n)
+    #global depth
+    #depth += 1
+    #print "depth = %d, n = %d" % (depth, n)
     if n == 0:
         wins[n] = False
         return

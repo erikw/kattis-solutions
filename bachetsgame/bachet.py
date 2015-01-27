@@ -2,14 +2,12 @@
 
 import sys
 
-
 def can_win(i, nbrs, wins):
     for nbr in nbrs:
         if nbr <= i:
             if not wins[i - nbr]:
                 return True
     return False
-
 
 for line in sys.stdin:
     nbrs = [int(x) for x in line.split()]

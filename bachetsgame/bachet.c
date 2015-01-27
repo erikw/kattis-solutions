@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 int can_win(int i, size_t m, int *nbrs, int *wins)
 {
 	for (size_t n_idx = 0; n_idx < m; ++n_idx) {
@@ -16,7 +15,6 @@ int can_win(int i, size_t m, int *nbrs, int *wins)
 
 int main()
 {
-
 	while (1) {
 		size_t n;
 		size_t m;
@@ -55,6 +53,5 @@ int main()
 		free(wins);
 		free(nbrs);
 	}
-
 	return EXIT_SUCCESS;
 }
