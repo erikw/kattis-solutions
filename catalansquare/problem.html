@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalan Square &ndash; Kattis, Kattis</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <!-- Fonts/Icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800,700italic,800italic|Merriweather:400,400italic,700" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Editable and Select2 -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon" />
+
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="/css/basic_style.css">
+    <link rel="stylesheet" href="/css/custom_style.css">
+    <link rel="stylesheet" href="/css/clars.css">
+
+    <script type="text/javascript">
+        window.page_loaded_at = new Date();
+        jQuery.noConflict();
+        var $j = jQuery;
+    </script>
+
+    
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            ignoreClass: ".*",
+            inlineMath: [['$','$'], ['\\(','\\)']]
+        },
+        MMLorHTML: {
+            prefer: { Firefox: "HTML" }
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+        <script type="text/javascript">
+
+var _gaq = _gaq || [];
+var pluginUrl =	'//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-26661929-8']);
+_gaq.push(['_setDomainName', 'open.kattis.com']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+    
+
+    
+    <style type="text/css">
+        .header {
+            margin-bottom: 0;
+        }
+
+        .page-content.single {
+            padding: 0;
+        }
+
+        .problem-headline h1 {
+            margin-top: 0;
+        }
+    </style>
+
+</head>
+
+<body class="page-problem page-problem-layout">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+<div id="wrapper">
+    <header class="header">
+    
+    <div class="wrap">
+        <div class="app-side fl">
+                                                                <a href="/" class="logo logo-open"><img src="/download/site-logo" alt="" /></a>
+
+            <nav class="main-nav">
+                <ul>
+                                                                    
+                        <li class=""><a href="/problems">Problems</a></li>
+                                                                    
+                        <li class=""><a href="/contests">Contests</a></li>
+                                                                    
+                        <li class=""><a href="/ranklist">Ranklists</a></li>
+                                                                    
+                        <li class=""><a href="/jobs">Jobs</a></li>
+                                                                    
+                        <li class=""><a href="/help">Help</a></li>
+                    
+                                                        </ul>
+            </nav>
+        </div>
+        <div class="user-side fr">
+
+            <nav class="user-nav">
+                <ul class="user-nav-ul">
+                    
+                    
+                                                    <li>
+                                <a href="/submit" class="btn green submit"><i class="fa fa-upload"></i>Submit</a>
+                            </li>
+                        
+                        <li>
+                            <div class="dropdown my-profile">
+                                <a data-toggle="dropdown" data-hover="dropdown" data-close-others="false" href="#" class="user-img-link">
+                                                                        <div class="user-img" style="background-image: url('/download/profile-picture?id=6746')"></div>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu pull-right">
+                                    <li class="caret"></li>
+                                    <li><a tabindex="-1" href="/users/erikw"><i class="glyphicon glyphicon-user blue"></i>Erik Westrup</a></li>
+                                    <li><a tabindex="-1" href="/users/erikw/settings"><i class="fa fa-lock blue"></i>User Settings</a></li>
+
+                                                                            <li><a tabindex="-1" href="/users/erikw/profile/edit"><i class="fa fa-edit blue"></i>Edit Profile</a></li>
+                                        <li><a tabindex="-1" href="/users/erikw/settings/email"><i class="fa fa-envelope blue"></i>E-mail Settings</a></li>
+                                    
+                                    
+
+                                    <li class="divider"></li>
+                                    <li><a tabindex="-1" href="/logout"><i class="glyphicon glyphicon-log-out red"></i>Log out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                                    </ul>
+
+            </nav>
+
+        </div>
+    </div>
+</header>
+
+
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+
+    
+
+    <div class="container">
+
+        
+
+        <div class="page-content single clearfix">
+            <section class="box clearfix main-content">
+                
+                
+
+
+
+
+<div class="problem-wrapper">
+
+    
+    <div class="problem-headline clearfix"><div class="headline-wrapper"><h1>Catalan Square</h1></div><div class="extra-info"><span>Problem ID: catalansquare</span><span>Time limit: 5 seconds</span><span>Memory limit: 1024 MB</span></div><div class="alt-buttons"><a href="/problems/catalansquare/statistics" class="btn large teal" data-toggle="tooltip" data-placement="top" title="Problem statistics"><i class="fa fa-bar-chart-o"></i></a><a href="/problems/catalansquare/submit" class="btn large green" data-toggle="tooltip" data-placement="top" title="Submit"><i class="fa fa-upload"></i></a></div><div class="problem-difficulty"><h4>Difficulty</h4><span>4.9</span></div><div class="problem-button-wrap"><div class="btn-group btn-group-sm"><a class="btn btn-sm btn-default solved" href="/users/erikw/submissions/catalansquare">My Submissions</a></div></div></div>
+
+            
+  <div class="problembody">
+    <div style="width:40.00%" class="illustration">
+      <img src=
+      "/problemimage?problem=catalansquare&amp;img=/en/img-0001.jpg"
+      alt=
+      "/problemimage?problem=catalansquare&amp;img=/en/img-0001.jpg"
+      class="illustration">
+
+      <div class="description">
+        Photo by Wikimedia Commons user Rauenstein
+      </div>
+    </div>
+
+    <p>Last weekend you and your friends went to visit the local
+    farmer’s market at the town square. As you were standing around
+    in a circle talking, you couldn’t help overhearing two of your
+    friends musing over what sounded like an interesting problem:
+    They were considering the number of ways in which you could all
+    shake hands, such that everyone in the circle simultaneously
+    shaked hands with one other person, but where no arms crossed
+    each other.</p>
+
+    <p>After a few seconds’ thought you decided to join your two
+    friends, to share (with them) the solution to their problem.
+    “If we are <span class="tex2jax_process">$2n$</span> persons”,
+    you said, “pick any particular person, and let that person
+    shake hands with somebody. That person will have to leave an
+    even number of people on each side of the person with whom
+    he/she shakes hands. Of the remaining <span class=
+    "tex2jax_process">$n-1$</span> pairs of people, he/she can
+    leave zero on the right and <span class=
+    "tex2jax_process">$n-1$</span> pairs on the left, <span class=
+    "tex2jax_process">$1$</span> on the right and <span class=
+    "tex2jax_process">$n-2$</span> pairs on the left, and so on.
+    The pairs remaining on the right and left can independently
+    choose any of the possible non-crossing handshake patterns, so
+    the count <span class="tex2jax_process">$C_ n$</span> for
+    <span class="tex2jax_process">$n$</span> pairs of people is
+    given by:</p><span class="tex2jax_process">\[ C_ n = C_{n-1}C_0
+    + C_{n-2}C_1 + \ldots + C_1C_{n-2} + C_0C_{n-1}, \]</span>
+
+    <p>which, together with the fact that <span class=
+    "tex2jax_process">$C_0=C_1=1$</span>, is just the definition of
+    the Catalan numbers.” By consulting your handy combinatorics
+    book, you find out that there is a much more efficient formula
+    for calculating <span class="tex2jax_process">$C_ n$</span>,
+    namely:</p><span class="tex2jax_process">\[ C_ n = \frac{\binom
+    {2n}{n}}{n+1}. \]</span>
+
+    <p>After a collective groan from the group, your particularly
+    cheeky friend Val called out “Well, since we are at the town
+    square, why don’t you try to square your Catalan numbers!”.
+    This was met with much rejoicing, while you started to think
+    about how to square the <em>Catalan sequence</em>…</p>
+
+    <h2>Task</h2>
+
+    <p>Let <span class="tex2jax_process">$C_ n$</span> be the
+    <span class="tex2jax_process">$n$</span>th Catalan number as
+    defined above. By regarding the sequence <span class=
+    "tex2jax_process">$(C_ n)_{n\geq 0}$</span> of Catalan numbers,
+    we can define a sequence <span class="tex2jax_process">$(S_
+    n)_{n\geq 0}$</span>, corresponding to “squaring the Catalan
+    sequence”, by considering the Cauchy product, or discrete
+    convolution, of <span class="tex2jax_process">$(C_ n)_{n\geq
+    0}$</span> with itself, i.e.,</p><span class=
+    "tex2jax_process">\[ S_ n = \sum _{k=0}^{n}C_ kC_{n-k}.
+    \]</span>
+
+    <p>Your task is to write a program for calculating the number
+    <span class="tex2jax_process">$S_ n$</span>.<a href=
+    "#a0000000004" class="footnote"><sup class=
+    "footnotemark">1</sup></a></p>
+
+    <h2>Input</h2>
+
+    <p>The input contains one line containing one non-negative
+    integer: <span class="tex2jax_process">$n$</span>, with
+    <span class="tex2jax_process">$0 \leq n \leq 5\,
+    000$</span>.</p>
+
+    <h2>Output</h2>
+
+    <p>Output a line containing <span class="tex2jax_process">$S_
+    n$</span>.</p>
+
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 1</th>
+
+        <th>Sample Output 1</th>
+      </tr>
+
+      <tr>
+        <td>
+          <pre>
+0
+</pre>
+        </td>
+
+        <td>
+          <pre>
+1
+</pre>
+        </td>
+      </tr>
+    </table>
+
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 2</th>
+
+        <th>Sample Output 2</th>
+      </tr>
+
+      <tr>
+        <td>
+          <pre>
+59
+</pre>
+        </td>
+
+        <td>
+          <pre>
+1583850964596120042686772779038896
+</pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footnotes">
+    <p><b>Footnotes</b></p>
+
+    <ol>
+      <li id="a0000000004">To see why <span class=
+      "tex2jax_process">$(S_ n)_{n\geq 0}$</span> could be said to
+      correspond to the square of the Catalan sequence we could
+      look at Cauchy products of power series. Suppose that
+      <span class="tex2jax_process">$p(x)=\sum _{n=0}^{\infty }a_
+      nx^ n$</span> and <span class="tex2jax_process">$q(x)=\sum
+      _{n=0}^{\infty }b_ nx^ n$</span>, then <span class=
+      "tex2jax_process">$p(x)\cdot q(x)=\sum _{n=0}^{\infty }c_ nx^
+      n$</span> where <span class="tex2jax_process">$c_ n=\sum
+      _{k=0}^{n}a_ kb_{n-k}$</span>.</li>
+    </ol>
+  </div>
+
+    
+            <p class='problem-download'>
+            <a href="/download/sampledata?id=catalansquare">Download</a> the sample data files
+        </p>
+    
+    
+    
+            <div class="source">
+            <p>
+                                    Author: Tommy Färnqvist.
+                
+                                    Source: Nordic Collegiate Programming Contest 2014.
+                
+                                    License:
+                                            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" style="vertical-align: middle;">
+                                                            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" />
+                                                    </a>
+                                                </p>
+        </div>
+    
+    
+    
+</div>
+
+
+            </section>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-info col-md-10 ">
+                                
+
+                            </div>
+            <div class="footer-powered col-md-2">
+                <h4>Powered by Kattis</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/js/boilerplate/plugins.js" type="text/javascript"></script>
+<script src="/js/site/main.js" type="text/javascript"></script>
+
+</body>
+</html>

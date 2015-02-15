@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Easiest Problem Is This One &ndash; Kattis, Kattis</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <!-- Fonts/Icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800,700italic,800italic|Merriweather:400,400italic,700" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Editable and Select2 -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon" />
+
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="/css/basic_style.css">
+    <link rel="stylesheet" href="/css/custom_style.css">
+    <link rel="stylesheet" href="/css/clars.css">
+
+    <script type="text/javascript">
+        window.page_loaded_at = new Date();
+        jQuery.noConflict();
+        var $j = jQuery;
+    </script>
+
+    
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            ignoreClass: ".*",
+            inlineMath: [['$','$'], ['\\(','\\)']]
+        },
+        MMLorHTML: {
+            prefer: { Firefox: "HTML" }
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+        <script type="text/javascript">
+
+var _gaq = _gaq || [];
+var pluginUrl =	'//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-26661929-8']);
+_gaq.push(['_setDomainName', 'open.kattis.com']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+    
+
+    
+    <style type="text/css">
+        .header {
+            margin-bottom: 0;
+        }
+
+        .page-content.single {
+            padding: 0;
+        }
+
+        .problem-headline h1 {
+            margin-top: 0;
+        }
+    </style>
+
+</head>
+
+<body class="page-problem page-problem-layout">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+<div id="wrapper">
+    <header class="header">
+    
+    <div class="wrap">
+        <div class="app-side fl">
+                                                                <a href="/" class="logo logo-open"><img src="/download/site-logo" alt="" /></a>
+
+            <nav class="main-nav">
+                <ul>
+                                                                    
+                        <li class=""><a href="/problems">Problems</a></li>
+                                                                    
+                        <li class=""><a href="/contests">Contests</a></li>
+                                                                    
+                        <li class=""><a href="/ranklist">Ranklists</a></li>
+                                                                    
+                        <li class=""><a href="/jobs">Jobs</a></li>
+                                                                    
+                        <li class=""><a href="/help">Help</a></li>
+                    
+                                                        </ul>
+            </nav>
+        </div>
+        <div class="user-side fr">
+
+            <nav class="user-nav">
+                <ul class="user-nav-ul">
+                    
+                    
+                                                    <li>
+                                <a href="/submit" class="btn green submit"><i class="fa fa-upload"></i>Submit</a>
+                            </li>
+                        
+                        <li>
+                            <div class="dropdown my-profile">
+                                <a data-toggle="dropdown" data-hover="dropdown" data-close-others="false" href="#" class="user-img-link">
+                                                                        <div class="user-img" style="background-image: url('/download/profile-picture?id=6746')"></div>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu pull-right">
+                                    <li class="caret"></li>
+                                    <li><a tabindex="-1" href="/users/erikw"><i class="glyphicon glyphicon-user blue"></i>Erik Westrup</a></li>
+                                    <li><a tabindex="-1" href="/users/erikw/settings"><i class="fa fa-lock blue"></i>User Settings</a></li>
+
+                                                                            <li><a tabindex="-1" href="/users/erikw/profile/edit"><i class="fa fa-edit blue"></i>Edit Profile</a></li>
+                                        <li><a tabindex="-1" href="/users/erikw/settings/email"><i class="fa fa-envelope blue"></i>E-mail Settings</a></li>
+                                    
+                                    
+
+                                    <li class="divider"></li>
+                                    <li><a tabindex="-1" href="/logout"><i class="glyphicon glyphicon-log-out red"></i>Log out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                                    </ul>
+
+            </nav>
+
+        </div>
+    </div>
+</header>
+
+
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+
+    
+
+    <div class="container">
+
+        
+
+        <div class="page-content single clearfix">
+            <section class="box clearfix main-content">
+                
+                
+
+
+
+
+<div class="problem-wrapper">
+
+    
+    <div class="problem-headline clearfix"><div class="headline-wrapper"><h1>The Easiest Problem Is This One</h1></div><div class="extra-info"><span>Problem ID: easiest</span><span>Time limit: 1 second</span><span>Memory limit: 1024 MB</span></div><div class="alt-buttons"><a href="/problems/easiest/statistics" class="btn large teal" data-toggle="tooltip" data-placement="top" title="Problem statistics"><i class="fa fa-bar-chart-o"></i></a><a href="/problems/easiest/submit" class="btn large green" data-toggle="tooltip" data-placement="top" title="Submit"><i class="fa fa-upload"></i></a></div><div class="problem-difficulty"><h4>Difficulty</h4><span>1.5</span></div><div class="problem-button-wrap"><div class="btn-group btn-group-sm"><a class="btn btn-sm btn-default solved" href="/users/erikw/submissions/easiest">My Submissions</a></div></div></div>
+
+            
+  <div class="problembody">
+    <p>Some people think this is the easiest problem in today’s
+    problem set. Some people think otherwise, since it involves
+    sums of digits of numbers and that’s difficult to grasp.</p>
+
+    <p>If we multiply a number <span class=
+    "tex2jax_process">$N$</span> with another number <span class=
+    "tex2jax_process">$m$</span>, the sum of digits typically
+    changes. For example, if <span class="tex2jax_process">$m =
+    26$</span> and <span class="tex2jax_process">$N=3029$</span>,
+    then <span class="tex2jax_process">$N\cdot m = 78754$</span>
+    and the sum of the digits is <span class=
+    "tex2jax_process">$31$</span>, while the sum of digits of
+    <span class="tex2jax_process">$N$</span> is 14.</p>
+
+    <p>However, there are some numbers that if multiplied by
+    <span class="tex2jax_process">$N$</span> will result in the
+    same sum of digits as the original number <span class=
+    "tex2jax_process">$N$</span>. For example, consider
+    <span class="tex2jax_process">$m = 37, N=3029$</span>, then
+    <span class="tex2jax_process">$N\cdot m = 112073$</span>, which
+    has sum of digits 14, same as the sum of digits of <span class=
+    "tex2jax_process">$N$</span>.</p>
+
+    <p>Your task is to find the smallest positive integer
+    <span class="tex2jax_process">$p$</span> among those that will
+    result in the same sum of the digits when multiplied by
+    <span class="tex2jax_process">$N$</span>. To make the task a
+    little bit more challenging, the number must also be higher
+    than ten.</p>
+
+    <h2>Input</h2>
+
+    <p>The input consists of several test cases. Each case is
+    described by a single line containing one positive integer
+    number <span class="tex2jax_process">$N, 1\leq N\leq 100\,
+    000$</span>. The last test case is followed by a line
+    containing zero.</p>
+
+    <h2>Output</h2>
+
+    <p>For each test case, print one line with a single integer
+    number <span class="tex2jax_process">$p$</span> which is the
+    minimal number such that <span class="tex2jax_process">$N\cdot
+    p$</span> has the same sum of digits as <span class=
+    "tex2jax_process">$N$</span> and <span class=
+    "tex2jax_process">$p$</span> is bigger than 10.</p>
+
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 1</th>
+
+        <th>Sample Output 1</th>
+      </tr>
+
+      <tr>
+        <td>
+          <pre>
+3029
+4
+5
+42
+0
+</pre>
+        </td>
+
+        <td>
+          <pre>
+37
+28
+28
+25
+</pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+    
+            <p class='problem-download'>
+            <a href="/download/sampledata?id=easiest">Download</a> the sample data files
+        </p>
+    
+    
+    
+            <div class="source">
+            <p>
+                                    Author: Unknown.
+                
+                                    Source: CTU Open 2010.
+                
+                                    License:
+                                            For educational use only
+                                                </p>
+        </div>
+    
+    
+    
+</div>
+
+
+            </section>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-info col-md-10 ">
+                                
+
+                            </div>
+            <div class="footer-powered col-md-2">
+                <h4>Powered by Kattis</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/js/boilerplate/plugins.js" type="text/javascript"></script>
+<script src="/js/site/main.js" type="text/javascript"></script>
+
+</body>
+</html>
