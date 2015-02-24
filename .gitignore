@@ -55,3 +55,6 @@ docs/_build/
 # Kattis stuff
 .kattisrc
 submit.py
+
+# Swap files
+*.sw[op]
