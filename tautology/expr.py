@@ -2,6 +2,8 @@
 
 from exceptions import *
 
+import pprint
+
 class Expr(object):
     def collect_vars(self):
         raise NotImplementedError
@@ -10,7 +12,7 @@ class Expr(object):
         raise NotImplementedError
 
 class Var(Expr):
-    def __init__(self, var_str, value):
+    def __init__(self, var_str, value=False):
         Expr.__init__(self)
         self.var_str = var_str
         self.value = value
@@ -21,11 +23,19 @@ class Var(Expr):
     def eval(self):
         return bool(self.value)
 
+    def set_value(self, new_val):
+        self.value = new_val
+
     def __str__(self):
         return self.var_str
 
     def __repr__(self):
         return self.var_str + "=" + str(self.value)
+
+    def __nonzero__(self):
+        return self.value
+
+    __bool__ = __nonzero__
 
 
 class Not(Expr):
@@ -83,6 +93,7 @@ class Equal(Expr):
     def __str__(self):
         pass
 
+
 class Imply(Expr):
     def __init__(self, ex0, ex1):
         self.ex0 = ex0
@@ -103,6 +114,18 @@ def is_tautology(expr):
     Iterate in binary fashion to test all possible combinations.
 
     """
-    variables = [expr.collect_vars()]
-    for var in variables:
-        print var
+    variables = list(expr.collect_vars())
+    [var.set_value(False) for var in variables]
+
+    for it in xrange(2**len(variables)):
+        #pprint.pprint(variables)
+        i = len(variables) - 1
+        while i >= 0 and variables[i]:
+            variables[i].set_value(False)
+            i -= 1
+        variables[i].set_value(True)
+
+        if not expr.eval():
+            return False
+
+    return True
