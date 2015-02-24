@@ -4,7 +4,9 @@ pyfiles= $(filter-out $(name), $(wildcard *.py))
 .PHONY: clean
 
 $(name): $(pyfiles)
-	cat $^ | grep -ve "^\s*\(from\|#!\/\)" | sed -e '/^\s*$$/d' > $@
+	echo "#!/usr/bin/env python2" > $@
+	cat $^ | grep -ve "^\s*\(from\|#!\/\)" | sed -e '/^\s*$$/d' >> $@
+	chmod 744 $@
 
 clean:
 	$(RM) $(name)
