@@ -6,7 +6,7 @@ class Expr(object):
     def collect_vars(self):
         raise NotImplementedError
 
-    def is_tautology(self):
+    def eval(self):
         raise NotImplementedError
 
 class Var(Expr):
@@ -18,7 +18,7 @@ class Var(Expr):
     def collect_vars(self):
         return { self }
 
-    def is_tautology(self):
+    def eval(self):
         return bool(self.value)
 
     def __str__(self):
@@ -35,8 +35,8 @@ class Not(Expr):
     def collect_vars(self):
         return self.ex.collect_vars()
 
-    def is_tautology(self):
-        return not self.ex.is_tautology()
+    def eval(self):
+        return not self.ex.eval()
 
     def __str__(self):
         pass
@@ -49,8 +49,8 @@ class Or(Expr):
     def collect_vars(self):
         return self.ex0.collect_vars() | self.ex1.collect_vars()
 
-    def is_tautology(self):
-        return self.ex0.is_tautology() or self.ex1.is_tautology()
+    def eval(self):
+        return self.ex0.eval() or self.ex1.eval()
 
     def __str__(self):
         pass
@@ -63,8 +63,8 @@ class And(Expr):
     def collect_vars(self):
         return self.ex0.collect_vars() | self.ex1.collect_vars()
 
-    def is_tautology(self):
-        return self.ex0.is_tautology() and self.ex1.is_tautology()
+    def eval(self):
+        return self.ex0.eval() and self.ex1.eval()
 
     def __str__(self):
         pass
@@ -77,8 +77,8 @@ class Equal(Expr):
     def collect_vars(self):
         return self.ex0.collect_vars() | self.ex1.collect_vars()
 
-    def is_tautology(self):
-        return self.ex0.is_tautology() == self.ex1.is_tautology()
+    def eval(self):
+        return self.ex0.eval() == self.ex1.eval()
 
     def __str__(self):
         pass
@@ -91,8 +91,8 @@ class Imply(Expr):
     def collect_vars(self):
         return self.ex0.collect_vars() | self.ex1.collect_vars()
 
-    def is_tautology(self):
-        return not self.ex0.is_tautology() or self.ex1.is_tautology()
+    def eval(self):
+        return not self.ex0.eval() or self.ex1.eval()
 
     def __str__(self):
         pass
@@ -103,4 +103,6 @@ def is_tautology(expr):
     Iterate in binary fashion to test all possible combinations.
 
     """
-    pass
+    variables = [expr.collect_vars()]
+    for var in variables:
+        print var

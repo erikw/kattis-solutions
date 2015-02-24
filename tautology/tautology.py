@@ -88,12 +88,16 @@ def run_tests():
     test_imply_expr()
 
     test_collect_vars()
+    
+    
+    test_taut_ornot()
     print "All pass."
 
 
-
-def test_tautology(variables, expr):
-    pass
+def test_taut_ornot():
+    p = Var("p", False)
+    opnp = Or(p, Not(p))
+    assert is_tautology(opnp)
 
 
 def main():
