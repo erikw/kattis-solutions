@@ -19,6 +19,7 @@ class Parser():
 
     def __init__(self, scanner):
         self.scn = scanner
+        self.vars = dict()  # str -> Var()
 
     def parse(self):
         return self._parse_expr()
@@ -56,11 +57,17 @@ class Parser():
         e = self._parse_expr()
         return Not(e)
 
+    def _parse_impl(self):
+        e0 = self._parse_expr()
+        e1 = self._parse_expr()
+        return Imply(e0, e1)
+
     def _parse_eq(self):
         e0 = self._parse_expr()
         e1 = self._parse_expr()
         return Equal(e0, e1)
 
     def _parse_var(self, name):
-        return Var(name)
-
+        if name not in self.vars:
+            self.vars[name] = Var(name)
+        return self.vars[name]

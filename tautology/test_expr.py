@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from expr import *
+from tautology  import is_tautology
 
 def test_var():
     v0 = Var("t0", False)

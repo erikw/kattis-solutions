@@ -55,7 +55,7 @@ class Not(Expr):
         return not self.ex.eval()
 
     def __str__(self):
-        pass
+        return "N" + str(self.ex)
 
     def __eq__(self, other):
         return  self.ex == other.ex
@@ -72,7 +72,7 @@ class Or(Expr):
         return self.ex0.eval() or self.ex1.eval()
 
     def __str__(self):
-        pass
+        return "A" + str(self.ex0) + str(self.ex1)
 
     def __eq__(self, other):
         return  self.ex0 == other.ex0 and self.ex1 == other.ex1
@@ -90,7 +90,7 @@ class And(Expr):
         return self.ex0.eval() and self.ex1.eval()
 
     def __str__(self):
-        pass
+        return "K" + str(self.ex0) + str(self.ex1)
 
     def __eq__(self, other):
         return  self.ex0 == other.ex0 and self.ex1 == other.ex1
@@ -108,7 +108,7 @@ class Equal(Expr):
         return self.ex0.eval() == self.ex1.eval()
 
     def __str__(self):
-        pass
+        return "E" + str(self.ex0) + str(self.ex1)
 
     def __eq__(self, other):
         return  self.ex0 == other.ex0 and self.ex1 == other.ex1
@@ -126,29 +126,7 @@ class Imply(Expr):
         return not self.ex0.eval() or self.ex1.eval()
 
     def __str__(self):
-        pass
+        return "C" + str(self.ex0) + str(self.ex1)
 
     def __eq__(self, other):
         return  self.ex0 == other.ex0 and self.ex1 == other.ex1
-
-def is_tautology(expr):
-    """Test if the given expression is a Tautology.
-
-    Iterate in binary fashion to test all possible combinations.
-
-    """
-    variables = list(expr.collect_vars())
-    [var.set_value(False) for var in variables]
-
-    for it in xrange(2**len(variables)):
-        #pprint.pprint(variables)
-        i = len(variables) - 1
-        while i >= 0 and variables[i]:
-            variables[i].set_value(False)
-            i -= 1
-        variables[i].set_value(True)
-
-        if not expr.eval():
-            return False
-
-    return True
