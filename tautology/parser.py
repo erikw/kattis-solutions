@@ -2,7 +2,9 @@
 from expr import *
 
 class InvalidExpression(Exception):
-    pass
+
+    def __init__(self, tok):
+        super(InvalidExpression, self).__init__(tok)
 
 class Parser():
 
@@ -36,9 +38,14 @@ class Parser():
         elif tok in self.TOK_VARS:
             e = self._parse_var(tok)
         else:
-            raise Parser.InvalidExpression()
+            raise InvalidExpression(tok)
 
         return e
+
+    def _parse_and(self):
+        e0 = self._parse_expr()
+        e1 = self._parse_expr()
+        return And(e0, e1)
 
     def _parse_or(self):
         e0 = self._parse_expr()
@@ -48,6 +55,11 @@ class Parser():
     def _parse_not(self):
         e = self._parse_expr()
         return Not(e)
+
+    def _parse_eq(self):
+        e0 = self._parse_expr()
+        e1 = self._parse_expr()
+        return Equal(e0, e1)
 
     def _parse_var(self, name):
         return Var(name)
