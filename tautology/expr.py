@@ -11,6 +11,9 @@ class Expr(object):
     def eval(self):
         raise NotImplementedError
 
+    def __eq__(self, other):
+        raise NotImplementedError
+
 class Var(Expr):
     def __init__(self, var_str, value=False):
         Expr.__init__(self)
@@ -37,6 +40,9 @@ class Var(Expr):
 
     __bool__ = __nonzero__
 
+    def __eq__(self, other):
+        return self.var_str == other.var_str and self.value == other.value
+
 
 class Not(Expr):
     def __init__(self, ex):
@@ -50,6 +56,9 @@ class Not(Expr):
 
     def __str__(self):
         pass
+
+    def __eq__(self, other):
+        return  self.ex == other.ex
 
 class Or(Expr):
     def __init__(self, ex0, ex1):
@@ -65,6 +74,10 @@ class Or(Expr):
     def __str__(self):
         pass
 
+    def __eq__(self, other):
+        return  self.ex0 == other.ex0 and self.ex1 == other.ex1
+
+
 class And(Expr):
     def __init__(self, ex0, ex1):
         self.ex0 = ex0
@@ -78,6 +91,10 @@ class And(Expr):
 
     def __str__(self):
         pass
+
+    def __eq__(self, other):
+        return  self.ex0 == other.ex0 and self.ex1 == other.ex1
+
 
 class Equal(Expr):
     def __init__(self, ex0, ex1):
@@ -93,6 +110,9 @@ class Equal(Expr):
     def __str__(self):
         pass
 
+    def __eq__(self, other):
+        return  self.ex0 == other.ex0 and self.ex1 == other.ex1
+
 
 class Imply(Expr):
     def __init__(self, ex0, ex1):
@@ -107,6 +127,9 @@ class Imply(Expr):
 
     def __str__(self):
         pass
+
+    def __eq__(self, other):
+        return  self.ex0 == other.ex0 and self.ex1 == other.ex1
 
 def is_tautology(expr):
     """Test if the given expression is a Tautology.
