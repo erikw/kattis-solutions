@@ -1,7 +1,9 @@
 name=all.py
-pyfile= $(filter-out $(name), $(wildcard *.py))
+pyfiles= $(filter-out $(name), $(wildcard *.py))
 
-$(name): $(pyfile)
+.PHONY: clean
+
+$(name): $(pyfiles)
 	cat $^ | grep -ve "^\s*\(from\|#!\/\)" | sed -e '/^\s*$$/d' > $@
 
 clean:
