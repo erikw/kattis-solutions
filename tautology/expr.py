@@ -43,6 +43,9 @@ class Var(Expr):
     def __eq__(self, other):
         return self.var_str == other.var_str and self.value == other.value
 
+    def __hash__(self):
+        return hash(self.var_str)
+
 
 class Not(Expr):
     def __init__(self, ex):
