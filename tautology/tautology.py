@@ -1,104 +1,50 @@
 #!/usr/bin/env python
 
-from expr import *
+import sys
+from  expr import *
+from  scanner import Scanner
+from  parser import Parser
 
-def test_var():
-    v0 = Var("t0", False)
-    assert not v0.is_tautology()
-    assert str(v0) == "t0"
-    assert repr(v0) == "t0=False"
+def is_tautology(expr):
+    """Test if the given expression is a Tautology.
 
-    v1 = Var("t1", True)
-    assert v1.is_tautology()
+    Iterate in binary fashion to test all possible combinations.
 
-def test_not_expr():
-    v0 = Var("t0", False)
-    nexpr = Not(v0)
-    assert nexpr.is_tautology()
-    nn = Not(Not(v0))
-    assert not nn.is_tautology()
+    """
+    variables = list(expr.collect_vars())
+    [var.set_value(False) for var in variables]
 
-def test_or_expr():
-    p = Var("p", False)
-    q = Var("q", True)
-    or0 = Or(p, p)
-    or1 = Or(p, q)
-    or2 = Or(q, p)
-    or3 = Or(q, q)
-    assert not or0.is_tautology()
-    assert or1.is_tautology()
-    assert or2.is_tautology()
-    assert or3.is_tautology()
+    for it in xrange(2**len(variables)):
+        #pprint.pprint(variables)
+        i = len(variables) - 1
+        while i >= 0 and variables[i]:
+            variables[i].set_value(False)
+            i -= 1
+        variables[i].set_value(True)
 
-def test_and_expr():
-    p = Var("p", False)
-    q = Var("q", True)
-    and0 = And(p, p)
-    and1 = And(p, q)
-    and2 = And(q, p)
-    and3 = And(q, q)
-    assert not and0.is_tautology()
-    assert not and1.is_tautology()
-    assert not and2.is_tautology()
-    assert and3.is_tautology()
+        if not expr.eval():
+            return False
 
-def test_equal_expr():
-    p = Var("p", False)
-    q = Var("q", True)
-    eq0 = Equal(p, p)
-    eq1 = Equal(p, q)
-    eq2 = Equal(q, p)
-    eq3 = Equal(q, q)
-    assert eq0.is_tautology()
-    assert not eq1.is_tautology()
-    assert not eq2.is_tautology()
-    assert eq3.is_tautology()
+    return True
 
-def test_imply_expr():
-    p = Var("p", False)
-    q = Var("q", True)
-    imp0 = Imply(p, p)
-    imp1 = Imply(p, q)
-    imp2 = Imply(q, p)
-    imp3 = Imply(q, q)
-    assert imp0.is_tautology()
-    assert imp1.is_tautology()
-    assert not imp2.is_tautology()
-    assert imp3.is_tautology()
-
-def test_collect_vars():
-    p = Var("p", False)
-    q = Var("q", False)
-    ex0 = Or(p, Not(p))
-    ex1 = Or(p, Not(q))
-
-    v0 = ex0.collect_vars()
-    v1 = ex1.collect_vars()
-    print v0, v1
-    assert v0 == { p }
-    assert v1 == { p, q }
-
-
-def run_tests():
-    test_var()
-    test_not_expr()
-    test_or_expr()
-    test_and_expr()
-    test_equal_expr()
-    test_imply_expr()
-
-    test_collect_vars()
-    print "All pass."
-
-
-
-def test_tautology(variables, expr):
-    pass
-
+def check_taut(line):
+    sc = Scanner(line)
+    pr = Parser(sc)
+    expr = pr.parse()
+    #print expr
+    if is_tautology(expr):
+        print "tautology"
+    else:
+        print "not"
 
 def main():
-    line = raw_input()
-    print line
+    for line in sys.stdin:
+        line = line.strip()
+        if line == "0":
+            break
+        check_taut(line)
+    return 0
+
 
 if __name__ == '__main__':
-    run_tests()
+    sys.exit(main())
