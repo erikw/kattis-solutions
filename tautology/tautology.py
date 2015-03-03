@@ -43,6 +43,7 @@ def main():
         if line == "0":
             break
         check_taut(line)
+    return 0
 
 
 if __name__ == '__main__':
