@@ -80,28 +80,6 @@ class TestExpr(object):
         assert v1 == { p, q }
 
 
-    def run_tests(self):
-        test_methods = [method for method in dir(self)
-                               if callable(getattr(self, method)) and 'test_' in method]
-        for test_method in test_methods:
-            getattr(self, test_method)()
-        #test_var()
-        #test_not_expr()
-        #test_or_expr()
-        #test_and_expr()
-        #test_equal_expr()
-        #test_imply_expr()
-
-        #test_collect_vars()
-
-        #test_taut_ornot()
-        #test_taut_ornot2()
-        #test_taut_compl()
-        #test_taut_compl2()
-        #test_taut_compl3()
-
-        print "All pass."
-
     def test_taut_ornot(self):
         p = Var("p")
         opnp = Or(p, Not(p))
@@ -152,6 +130,13 @@ class TestExpr(object):
         ntaut = And(And(And(And(pandnp, qandnq), randnr), sandns), tandnt)
         assert not is_tautology(ntaut)
 
+    def run_tests(self):
+        test_methods = [method for method in dir(self)
+                               if callable(getattr(self, method)) and 'test_' in method]
+        for test_method in test_methods:
+            getattr(self, test_method)()
+
+        print "All pass."
 
 if __name__ == '__main__':
     TestExpr().run_tests()
