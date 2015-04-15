@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cranes &ndash; Kattis, Kattis</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <!-- Fonts/Icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800,700italic,800italic|Merriweather:400,400italic,700" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Editable and Select2 -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon" />
+
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="/css/basic_style.css">
+    <link rel="stylesheet" href="/css/custom_style.css">
+    <link rel="stylesheet" href="/css/clars.css">
+
+    <script type="text/javascript">
+        window.page_loaded_at = new Date();
+        jQuery.noConflict();
+        var $j = jQuery;
+    </script>
+
+    
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            ignoreClass: ".*",
+            inlineMath: [['$','$'], ['\\(','\\)']]
+        },
+        MMLorHTML: {
+            prefer: { Firefox: "HTML" }
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+        <script>
+  (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26661929-8', 'auto');
+  ga('set', 'forceSSL', true);
+  ga('send', 'pageview');
+
+</script>
+
+    
+
+    
+    <style type="text/css">
+        .header {
+            margin-bottom: 0;
+        }
+
+        .page-content.single {
+            padding: 0;
+        }
+
+        .problem-headline h1 {
+            margin-top: 0;
+        }
+    </style>
+
+</head>
+
+<body class="page-problem page-problem-layout">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+<div id="wrapper">
+    <header class="header">
+    
+    <div class="wrap">
+        <div class="app-side fl">
+            <a href="/" class="logo logo-open"><img src="/download/site-logo" alt="" /></a>
+
+            <nav class="main-nav">
+                <ul>
+                                                                    
+                        <li class=""><a href="/problems">Problems</a></li>
+                                                                    
+                        <li class=""><a href="/contests">Contests</a></li>
+                                                                    
+                        <li class=""><a href="/ranklist">Ranklists</a></li>
+                                                                    
+                        <li class=""><a href="/jobs">Jobs (2)</a></li>
+                                                                    
+                        <li class=""><a href="/help">Help</a></li>
+                    
+                                                        </ul>
+            </nav>
+        </div>
+        <div class="user-side fr">
+
+            <nav class="user-nav">
+                <ul class="user-nav-ul">
+                    
+                    
+                                                    <li>
+                                <a href="/submit" class="btn green submit"><i class="fa fa-upload"></i>Submit</a>
+                            </li>
+                        
+                        <li>
+                            <div class="dropdown my-profile">
+                                <a data-toggle="dropdown" data-hover="dropdown" data-close-others="false" href="#" class="user-img-link">
+                                                                        <div class="user-img" style="background-image: url('/images/site/content/default-userpic-outline.png')"></div>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu pull-right">
+                                    <li class="caret"></li>
+                                    <li><a tabindex="-1" href="/users/gustaf-waldemarson"><i class="glyphicon glyphicon-user blue"></i>Gustaf Waldemarson</a></li>
+                                    <li><a tabindex="-1" href="/users/gustaf-waldemarson/settings"><i class="fa fa-lock blue"></i>User Settings</a></li>
+
+                                                                            <li><a tabindex="-1" href="/users/gustaf-waldemarson/profile/edit"><i class="fa fa-edit blue"></i>Edit Profile</a></li>
+                                        <li><a tabindex="-1" href="/users/gustaf-waldemarson/settings/email"><i class="fa fa-envelope blue"></i>E-mail Settings</a></li>
+                                    
+                                    
+
+                                    <li class="divider"></li>
+                                    <li><a tabindex="-1" href="/logout"><i class="glyphicon glyphicon-log-out red"></i>Log out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                                    </ul>
+
+            </nav>
+
+        </div>
+    </div>
+</header>
+
+
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+
+    
+
+    <div class="container">
+
+        
+
+        <div class="page-content single clearfix">
+            <section class="box clearfix main-content">
+                
+                
+
+
+
+
+<div class="problem-wrapper">
+
+    
+    <div class="problem-headline clearfix"><div class="headline-wrapper"><h1>Cranes</h1></div><div class="extra-info"><span>Problem ID: cranes</span><span>Time limit: 1 second</span><span>Memory limit: 1024 MB</span></div><div class="alt-buttons"><a href="/problems/cranes/statistics" class="btn large teal" data-toggle="tooltip" data-placement="top" title="Problem statistics"><i class="fa fa-bar-chart-o"></i></a><a href="/problems/cranes/submit" class="btn large green" data-toggle="tooltip" data-placement="top" title="Submit"><i class="fa fa-upload"></i></a></div><div class="problem-difficulty"><h4>Difficulty</h4><span>4.0</span></div><div class="problem-button-wrap"><div class="btn-group btn-group-sm"></div></div></div>
+
+            
+  <div class="problembody">
+    <p>A crane is a wonderful tool for putting up a building. It
+    makes the job go very quickly. When the building must go up
+    even faster, more than one crane can be used. However, when
+    there are too many cranes working on the same building, it can
+    get dangerous. As the cranes spins around, it can bump into
+    another crane if the operator is not careful. Such an accident
+    could cause the cranes to fall over, possibly causing major
+    damage. Therefore, safety regulations require cranes to be
+    spaced far enough apart so that it is impossible for any part
+    of a crane to touch any part of any other crane. Unfortunately,
+    these regulations limit the number of cranes that can be used
+    on the construction site, slowing down the pace of
+    construction. Your task is to place the cranes on the
+    construction site while respecting the safety regulations.</p>
+
+    <p>The construction site is laid out as a square grid. Several
+    places on the grid have been marked as possible crane
+    locations. The arm of each crane has a certain length
+    <span class="tex2jax_process">$r$</span>, and can rotate around
+    the location of the crane. The crane covers the entire area
+    that is no more than <span class="tex2jax_process">$r$</span>
+    units away from the location of the crane. You are to place the
+    cranes to maximize the total area covered by all the
+    cranes.</p>
+
+    <h2>Input</h2>
+
+    <p>The first line of input contains one integer specifying the
+    number of test cases and there will be at most <span class=
+    "tex2jax_process">$20$</span> test cases. Each test case begins
+    with a line containing an integer <span class=
+    "tex2jax_process">$C$</span>, the number of possible locations
+    where a crane could be placed. There will be no more than 15
+    such locations. Each of the following <span class=
+    "tex2jax_process">$C$</span> lines contains three integers
+    <span class="tex2jax_process">$x$</span>, <span class=
+    "tex2jax_process">$y$</span>, and <span class=
+    "tex2jax_process">$r$</span>, all between <span class=
+    "tex2jax_process">$-10\, 000$</span> and <span class=
+    "tex2jax_process">$10\, 000$</span> inclusive and <span class=
+    "tex2jax_process">$r$</span> will be positive. The first two
+    integers are the grid coordinates of the location, and the
+    third integer is the length of the arm of the crane that can be
+    placed at that location.</p>
+
+    <h2>Output</h2>
+
+    <p>For each test case, find the maximum area <span class=
+    "tex2jax_process">$A$</span> that can be covered by cranes, and
+    output a line containing a single integer <span class=
+    "tex2jax_process">$B$</span> such that <span class=
+    "tex2jax_process">$A = B \times \pi $</span>.</p>
+
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 1</th>
+
+        <th>Sample Output 1</th>
+      </tr>
+
+      <tr>
+        <td>
+          <pre>
+1
+3
+0 0 4
+5 0 4
+-5 0 4
+</pre>
+        </td>
+
+        <td>
+          <pre>
+32
+</pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+    
+            <p class='problem-download'>
+            <a href="/download/sampledata?id=cranes">Download</a> the sample data files
+        </p>
+    
+    
+    
+            <div class="source">
+            <p>
+                
+                                    Source: Waterloo ACM Programming Contest, October 04, 2008.
+                
+                                    License:
+                                            For educational use only
+                                                </p>
+        </div>
+    
+    
+    
+</div>
+
+
+            </section>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-info col-md-10 ">
+                                
+
+                            </div>
+            <div class="footer-powered col-md-2">
+                <h4>Powered by Kattis</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/js/boilerplate/plugins.js" type="text/javascript"></script>
+<script src="/js/site/main.js" type="text/javascript"></script>
+<script>initSite();</script>
+
+</body>
+</html>
