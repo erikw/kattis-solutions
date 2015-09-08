@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-import pprint
-
+import sys
 
 def keyboard_graph(string, coord_dict):
     """Construct the keyboard cost graph.
@@ -28,7 +27,6 @@ def keyboard_graph(string, coord_dict):
 
     return g, i
 
-
 def read_input():
     r, c = [int(d) for d in raw_input().split()]
     keyboard = {} # char -> [(x,y)]
@@ -40,11 +38,34 @@ def read_input():
     string = raw_input().strip()
     return r, c, string, keyboard
 
+def dijkstra(graph, src, dst):
+    dist = { u: sys.maxint for u in graph }
+    dist[src] = 0
+    Q = set(graph)
+
+    while Q:
+        u = None
+        mini = sys.maxint
+        for q in Q:
+            if dist[q] < mini:
+                u = q
+                mini = dist[q]
+        Q.remove(u)
+
+        if u is dst:
+            return dist[dst]
+
+        for mate, len_ in graph[u]:
+            alt = dist[u] + len_
+            if alt < dist[mate]:
+                dist[mate] = alt
+    return dist[dst]
+
 
 def main():
     r, c, string, kb = read_input()
     g, i = keyboard_graph(string + '*', kb)
-    pprint.pprint(g)
+    print dijkstra(g, g[0], g[i])
 
 if __name__ == '__main__':
     main()
