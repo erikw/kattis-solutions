@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>iBoard &ndash; Kattis, Kattis</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <!-- Fonts/Icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800,700italic,800italic%7CMerriweather:400,400italic,700" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Editable and Select2 -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon" />
+
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="/css/basic_style.css">
+    <link rel="stylesheet" href="/css/custom_style.css">
+    <link rel="stylesheet" href="/css/clars.css">
+    <link rel="stylesheet" href="/css/problem_style.css">
+
+    <script type="text/javascript">
+        window.page_loaded_at = new Date();
+        jQuery.noConflict();
+        var $j = jQuery;
+    </script>
+
+    
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            ignoreClass: ".*",
+            inlineMath: [['$','$'], ['\\(','\\)']]
+        },
+        MMLorHTML: {
+            prefer: { Firefox: "HTML" }
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+        <script>
+  (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26661929-8', 'auto');
+  ga('set', 'forceSSL', true);
+  ga('send', 'pageview');
+
+</script>
+
+    
+
+    
+    <style type="text/css">
+        .header {
+            margin-bottom: 0;
+        }
+
+        .page-content.single {
+            padding: 0;
+        }
+
+        .problem-headline h1 {
+            margin-top: 0;
+        }
+    </style>
+
+</head>
+
+<body class="page-problem page-problem-layout">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+<div id="wrapper">
+    <header class="header">
+    
+    <div class="wrap">
+        <div class="app-side fl">
+            <a href="/" class="logo logo-open"><img src="/download/site-logo" alt="" /></a>
+
+            <nav class="main-nav">
+                <ul>
+                                                                    
+                        <li class=""><a href="/problems">Problems</a></li>
+                                                                    
+                        <li class=""><a href="/contests">Contests</a></li>
+                                                                    
+                        <li class=""><a href="/ranklist">Ranklists</a></li>
+                                                                    
+                        <li class=""><a href="/jobs">Jobs (9)</a></li>
+                                                                    
+                        <li class=""><a href="/help">Help</a></li>
+                    
+                                                        </ul>
+            </nav>
+        </div>
+        <div class="user-side fr">
+
+            <nav class="user-nav">
+                <ul class="user-nav-ul">
+                    
+                    
+                                                    <li>
+                                <a href="/submit" class="btn green submit"><i class="fa fa-upload"></i>Submit</a>
+                            </li>
+                        
+                        <li>
+                            <div class="dropdown my-profile">
+                                <a data-toggle="dropdown" data-hover="dropdown" data-close-others="false" href="#" class="user-img-link">
+                                                                        <div class="user-img" style="background-image: url('/download/profile-picture?id=13684')"></div>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu pull-right">
+                                    <li class="caret"></li>
+                                    <li><a tabindex="-1" href="/users/team-baud"><i class="glyphicon glyphicon-user blue"></i>Team Baud</a></li>
+                                    <li><a tabindex="-1" href="/users/team-baud/settings"><i class="fa fa-lock blue"></i>User Settings</a></li>
+
+                                                                            <li><a tabindex="-1" href="/users/team-baud/profile/edit"><i class="fa fa-edit blue"></i>Edit Profile</a></li>
+                                        <li><a tabindex="-1" href="/users/team-baud/settings/email"><i class="fa fa-envelope blue"></i>E-mail Settings</a></li>
+                                    
+                                    
+
+                                    <li class="divider"></li>
+                                    <li><a tabindex="-1" href="/logout"><i class="glyphicon glyphicon-log-out red"></i>Log out</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                                    </ul>
+
+            </nav>
+
+        </div>
+    </div>
+</header>
+
+
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+
+    
+
+    <div class="container">
+
+        
+
+        <div class="page-content single clearfix">
+            <section class="box clearfix main-content">
+                
+                
+
+
+
+
+<div class="problem-wrapper">
+
+    
+    <div class="problem-headline clearfix"><div class="headline-wrapper"><h1>iBoard</h1></div><div class="extra-info"><span>Problem ID: iboard</span><span>Time limit: 1 second</span><span>Memory limit: 1024 MB</span></div><div class="alt-buttons"><a href="/problems/iboard/statistics" class="btn large teal" data-toggle="tooltip" data-placement="top" title="Problem statistics"><i class="fa fa-bar-chart-o"></i></a><a href="/problems/iboard/submit" class="btn large green" data-toggle="tooltip" data-placement="top" title="Submit"><i class="fa fa-upload"></i></a></div><div class="problem-difficulty"><h4>Difficulty</h4><span>3.5</span></div><div class="problem-button-wrap"><div class="btn-group btn-group-sm"><a class="btn btn-sm btn-default solved" href="/users/team-baud/submissions/iboard">My Submissions</a></div></div></div>
+
+            
+  <div class="problembody">
+    <center>
+      <img src=
+      "/problemimage?problem=iboard&amp;img=/en/img-0001.png" alt=
+      "\includegraphics[scale=0.18]{iBoard.png}" style=
+      "width:; height:">
+    </center>
+
+    <p>After years of success with a single-button mouse, a well
+    known computer company has decided to offer a similarly
+    simplified interface for the keyboard. The iBoard has only two
+    keys. The user types by entering the ASCII code for each
+    letter. To help people type faster, the iBoard uses key press
+    and key release transitions to enter characters. Pressing or
+    releasing the right key enters zero for the next bit. Pressing
+    or releasing the left key enters a one. The binary code for
+    each 7-bit ASCII character is entered starting with the least
+    significant bit and working up to the most significant bit. For
+    example, to type a capital Z, the user simply has to press the
+    right key, press the left key, release the right key, release
+    the left key, press the left key, press the right key and then
+    release the left key.</p>
+
+    <p>Although its creators would like you to believe that the
+    iBoard is far superior to any other keyboard, it does have one
+    disadvantage. The operator may not be free to get up and go to
+    the bathroom as soon as he or she needs to. After typing a
+    string of characters, the user may be stuck with one or more
+    fingers pressing iBoard keys. Releasing these keys would begin
+    typing the next character. Your job is to write a program that
+    determines when it’s safe to get up and leave the keyboard.
+    Your program should read input strings and report if it’s safe
+    to get up and leave the iBoard after typing each string.</p>
+
+    <h2>Input</h2>
+
+    <p>Input contains up to 100 strings, one per line, terminated
+    at end of file. Each string has between 1 and 100 ASCII
+    characters. End-of-line characters should not be considered
+    part of each string.</p>
+
+    <h2>Output</h2>
+
+    <p>For each input string, print out a line reporting either
+    <tt class="tt">trapped</tt> or <tt class="tt">free</tt>. The
+    user is considered trapped if one or more iBoard keys is still
+    being pressed after the string is typed. Otherwise, the user is
+    free. You should assume that no iBoard keys are being pressed
+    when the user starts typing the string.</p>
+
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 1</th>
+
+        <th>Sample Output 1</th>
+      </tr>
+
+      <tr>
+        <td>
+          <pre>
+Keep up the good work.
+iBoard Rules!!
+qwerty
+</pre>
+        </td>
+
+        <td>
+          <pre>
+trapped
+free
+trapped
+</pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+    
+            <p class='problem-download'>
+            <a href="/download/sampledata?id=iboard">Download</a> the sample data files
+        </p>
+    
+    
+    
+            <div class="source">
+            <p>
+                                    Author: David Sturgill.
+                
+                                    Source: Baylor Competitive Learning course.
+                
+                License:
+                                    <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/" style="vertical-align: middle;">
+                                                    <img alt="Creative Commons License (cc by-sa)" style="border-width:0" src="https://licensebuttons.net/l/by-sa/3.0/80x15.png" />
+                                                    </a>
+                            </p>
+        </div>
+    
+    
+    
+</div>
+
+
+            </section>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-info col-md-10 ">
+                
+                            </div>
+            <div class="footer-powered col-md-2">
+                <h4>Powered by Kattis</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/js/boilerplate/plugins.js" type="text/javascript"></script>
+<script src="/js/site/main.js" type="text/javascript"></script>
+<script>initSite();</script>
+
+</body>
+</html>
