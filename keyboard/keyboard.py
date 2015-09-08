@@ -65,7 +65,7 @@ def dijkstra(graph, src, dst):
 def main():
     r, c, string, kb = read_input()
     g, i = keyboard_graph(string + '*', kb)
-    print dijkstra(g, g[0], g[i])
+    print dijkstra(g, 0, i)
 
 if __name__ == '__main__':
     main()
