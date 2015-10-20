@@ -2,7 +2,7 @@
 
 mkdir "$1"
 cat > "$1/$1.py" << ENDOFSTRING
-#!/usr/bin/env python 
+#!/usr/bin/env python
 
 def main():
     pass
@@ -10,4 +10,3 @@ def main():
 if __name__ == '__main__':
     main()
 ENDOFSTRING
-
