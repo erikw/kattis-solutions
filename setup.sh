@@ -27,3 +27,6 @@ fi
 if [ -f "$1/sample.ans" ]; then
 	mv "$1/sample.ans" "$1/0.ans"
 fi
+
+# Save problem page.
+wget --quiet -O "$1/problem.html" "https://open.kattis.com/problems/$1"
