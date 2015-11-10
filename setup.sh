@@ -4,11 +4,13 @@ mkdir "$1"
 cat > "$1/$1.py" << ENDOFSTRING
 #!/usr/bin/env python
 
+import sys
+
 def main():
-    pass
+    return 0
 
 if __name__ == '__main__':
-    main()
+	sys.exit(main())
 ENDOFSTRING
 
 chmod u+x "$1/$1.py"
