@@ -10,7 +10,7 @@ def main():
     return 0
 
 if __name__ == '__main__':
-	sys.exit(main())
+    sys.exit(main())
 ENDOFSTRING
 
 chmod u+x "$1/$1.py"
